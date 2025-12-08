@@ -1,34 +1,54 @@
 <!DOCTYPE html>
-<html lang="es" >
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title> Feliz Navidad</title>
+  <title>Feliz Navidad</title>
   <link rel="stylesheet" href="./style.css">
-
 </head>
 <body>
 
-<div class="card">
-		<div class="imgBox">
-			<div class="bark"></div>
-			<img src="Navidad.jpg"
-			 <audio autoplay loop>
-        <source src="https://github.com/Toolco/CumpleRyA/raw/main/Mat.mp3" type="audio/mpeg">
-			
-		</div>
-		<div class="details">
-			<h4 class="color1">Maestra Karina</h2>
-			<h4 class="color2 margin">(FELICES FIESTAS)</h3>
-			<p><strong>¡Maestra</strong>, le deseo lo mejor para usted y</p> <p> su familia en esta navidad!</p>
-			<p> </p>
-			<p>Mi deseo sincero es que la Navidad sea</p> <p>para usted un espacio de descanso,</p> <p>reflexión y alegría compartida.</p>
-			<p>Gracias por el Maxito :)</p>
-			
-			<p>Se les aprecia Mucho ♥ </p>
-			<p class="text-right">Gracias por todo</p>
-			<p class="text-right">del Caamal</p>
-		</div>
-	</div>
+<div class="card" onclick="playAudio()"> <div class="imgBox">
+        <div class="bark"></div>
+        <img src="Navidad.jpg" alt="Portada Navidad"> 
+        
+        <audio id="musicaNavidad" loop>
+            <source src="https://github.com/Toolco/CumpleRyA/raw/main/Mat.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+    
+    <div class="details">
+        <h4 class="color1">Maestra Karina</h4>
+        <h4 class="color2 margin">(FELICES FIESTAS)</h4>
+        <p><strong>¡Maestra</strong>, le deseo lo mejor para usted y</p> 
+        <p>su familia en esta navidad!</p>
+        <p> </p>
+        <p>Mi deseo sincero es que la Navidad sea</p> 
+        <p>para usted un espacio de descanso,</p> 
+        <p>reflexión y alegría compartida.</p>
+        <p>Gracias por el Maxito :)</p>
+        
+        <p>Se les aprecia Mucho ♥ </p>
+        <p class="text-right">Gracias por todo</p>
+        <p class="text-right">del Caamal</p>
+    </div>
+</div>
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById("musicaNavidad");
+        // Intenta reproducir el audio
+        audio.play().catch(function(error) {
+            console.log("Esperando interacción del usuario para reproducir audio.");
+        });
+    }
+
+    // También intentamos reproducir si hacen clic en cualquier parte del cuerpo de la página
+    document.body.addEventListener('click', function() {
+        var audio = document.getElementById("musicaNavidad");
+        audio.play();
+    }, { once: true }); // { once: true } hace que esto solo se ejecute la primera vez
+</script>
 
 </body>
 </html>
