@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <head>
   <meta charset="UTF-8">
   <title>Feliz Navidad</title>
@@ -38,51 +39,54 @@
 </div>
 
 <script>
-    // Script del Audio (del mensaje anterior)
+    // --- AUDIO Y CONFETI AL HACER CLIC ---
+    
     function playAudio() {
         var audio = document.getElementById("musicaNavidad");
+        
+        // 1. Reproducir audio
         audio.play().catch(function(error) {
-            console.log("Esperando interacción para reproducir audio.");
+            console.log("Esperando interacción...");
         });
+
+        // 2. Lanzar confeti (¡La parte nueva!)
+        lanzarConfeti();
     }
+
+    // Listener para el cuerpo de la página
     document.body.addEventListener('click', function() {
         var audio = document.getElementById("musicaNavidad");
         audio.play();
+        lanzarConfeti(); // También lanza confeti si dan clic fuera
     }, { once: true });
 
-    // --- NUEVO SCRIPT PARA LA NIEVE ---
 
+    // --- FUNCIÓN DE CONFETI ---
+    function lanzarConfeti() {
+        // Un disparo de confeti desde el centro
+        confetti({
+            particleCount: 150, // Cantidad de papelitos
+            spread: 70,         // Qué tan abierto es el disparo
+            origin: { y: 0.6 }, // Desde dónde sale (un poco más abajo de la mitad)
+            colors: ['#ff0000', '#00ff00', '#ffffff', '#ffd700'] // Colores navideños (Rojo, Verde, Blanco, Dorado)
+        });
+    }
+
+    // --- SCRIPT DE NIEVE (EL QUE YA TENÍAS) ---
     function createSnowflake() {
         const snowContainer = document.getElementById('snow-container');
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
-
-        // Randomización para que se vea natural:
-        
-        // 1. Posición horizontal aleatoria (de 0 a 100vw)
         snowflake.style.left = Math.random() * 100 + 'vw';
-        
-        // 2. Tamaño aleatorio (entre 2px y 7px)
         const size = Math.random() * 5 + 2;
         snowflake.style.width = size + 'px';
         snowflake.style.height = size + 'px';
-        
-        // 3. Duración de caída aleatoria (entre 3s y 8s) - Unos caen rápido, otros lento
         const duration = Math.random() * 5 + 3;
         snowflake.style.animationDuration = duration + 's';
-        
-        // 4. Un poco de opacidad aleatoria
         snowflake.style.opacity = Math.random() * 0.5 + 0.5;
-
         snowContainer.appendChild(snowflake);
-
-        // Eliminar el copo después de que caiga para no saturar el navegador
-        setTimeout(() => {
-            snowflake.remove();
-        }, duration * 1000);
+        setTimeout(() => { snowflake.remove(); }, duration * 1000);
     }
-
-    // Crear un copo de nieve cada 100 milisegundos (ajusta este número: menor = más nieve)
     setInterval(createSnowflake, 100);
 </script>
 
