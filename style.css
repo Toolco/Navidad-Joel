@@ -121,3 +121,33 @@ h4 {
 .text-right {
 	text-align: right;
 }
+/* Contenedor para que la nieve no afecte el diseño principal */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* IMPORTANTÍSIMO: Esto permite dar clics a través de la nieve */
+    z-index: 9999; /* Para que esté por encima de todo */
+    overflow: hidden;
+}
+
+/* El estilo del copo de nieve individual */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    /* Sombra para que resalte un poquito más */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    animation: fall linear forwards;
+}
+
+/* La animación de caída */
+@keyframes fall {
+    to {
+        transform: translateY(105vh); /* Cae hasta un poco más abajo del final de la pantalla */
+    }
+}
