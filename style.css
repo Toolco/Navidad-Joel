@@ -151,3 +151,19 @@ h4 {
         transform: translateY(105vh); /* Cae hasta un poco más abajo del final de la pantalla */
     }
 }
+
+/* Efecto de brillo dorado para el título */
+.color2 {
+    color: #ffd700; /* Color dorado base */
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00, 0 0 20px #ff0000;
+    animation: brillo 2s infinite alternate;
+}
+
+@keyframes brillo {
+    from {
+        text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00;
+    }
+    to {
+        text-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00, 0 0 30px #ff0000;
+    }
+}
