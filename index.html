@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <title>Feliz Navidad</title>
   <link rel="stylesheet" href="./style.css">
-</head>
+  </head>
 <body>
 
-<div class="card" onclick="playAudio()"> <div class="imgBox">
+<div id="snow-container"></div>
+
+<div class="card" onclick="playAudio()">
+    <div class="imgBox">
         <div class="bark"></div>
-        <img src="Navidad.jpg" alt="Portada Navidad"> 
+        <img src="Navidad.jpg" alt="Portada Navidad">
         
         <audio id="musicaNavidad" loop>
             <source src="https://github.com/Toolco/CumpleRyA/raw/main/Mat.mp3" type="audio/mpeg">
@@ -20,11 +23,11 @@
     <div class="details">
         <h4 class="color1">Maestra Karina</h4>
         <h4 class="color2 margin">(FELICES FIESTAS)</h4>
-        <p><strong>¡Maestra</strong>, le deseo lo mejor para usted y</p> 
+        <p><strong>¡Maestra</strong>, le deseo lo mejor para usted y</p>
         <p>su familia en esta navidad!</p>
         <p> </p>
-        <p>Mi deseo sincero es que la Navidad sea</p> 
-        <p>para usted un espacio de descanso,</p> 
+        <p>Mi deseo sincero es que la Navidad sea</p>
+        <p>para usted un espacio de descanso,</p>
         <p>reflexión y alegría compartida.</p>
         <p>Gracias por el Maxito :)</p>
         
@@ -35,19 +38,52 @@
 </div>
 
 <script>
+    // Script del Audio (del mensaje anterior)
     function playAudio() {
         var audio = document.getElementById("musicaNavidad");
-        // Intenta reproducir el audio
         audio.play().catch(function(error) {
-            console.log("Esperando interacción del usuario para reproducir audio.");
+            console.log("Esperando interacción para reproducir audio.");
         });
     }
-
-    // También intentamos reproducir si hacen clic en cualquier parte del cuerpo de la página
     document.body.addEventListener('click', function() {
         var audio = document.getElementById("musicaNavidad");
         audio.play();
-    }, { once: true }); // { once: true } hace que esto solo se ejecute la primera vez
+    }, { once: true });
+
+    // --- NUEVO SCRIPT PARA LA NIEVE ---
+
+    function createSnowflake() {
+        const snowContainer = document.getElementById('snow-container');
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+
+        // Randomización para que se vea natural:
+        
+        // 1. Posición horizontal aleatoria (de 0 a 100vw)
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        
+        // 2. Tamaño aleatorio (entre 2px y 7px)
+        const size = Math.random() * 5 + 2;
+        snowflake.style.width = size + 'px';
+        snowflake.style.height = size + 'px';
+        
+        // 3. Duración de caída aleatoria (entre 3s y 8s) - Unos caen rápido, otros lento
+        const duration = Math.random() * 5 + 3;
+        snowflake.style.animationDuration = duration + 's';
+        
+        // 4. Un poco de opacidad aleatoria
+        snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+
+        snowContainer.appendChild(snowflake);
+
+        // Eliminar el copo después de que caiga para no saturar el navegador
+        setTimeout(() => {
+            snowflake.remove();
+        }, duration * 1000);
+    }
+
+    // Crear un copo de nieve cada 100 milisegundos (ajusta este número: menor = más nieve)
+    setInterval(createSnowflake, 100);
 </script>
 
 </body>
